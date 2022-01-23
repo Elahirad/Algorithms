@@ -136,4 +136,30 @@ public class SortingAlgorithms
 
         return boundary;
     }
+
+    public void CountingSort(int[] array)
+    {
+        int max = int.MinValue;
+        int i;
+        for (i = 0; i < array.Length; i++)
+        {
+            if (array[i] > max) max = array[i];
+        }
+
+        var countingArray = new int[max + 1];
+        for (i = 0; i < array.Length; i++)
+        {
+            countingArray[array[i]]++;
+        }
+
+        i = 0;
+        for (int j = 0; j < countingArray.Length; j++)
+        {
+            for (int k = 0; k < countingArray[j]; k++)
+            {
+                array[i] = j;
+                i++;
+            }
+        }
+    }
 }
