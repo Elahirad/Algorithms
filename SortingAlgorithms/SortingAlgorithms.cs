@@ -89,4 +89,51 @@ public class SortingAlgorithms
             }
         }
     }
+
+    public void QSort(int[] array)
+    {
+        QSort(array, array.Length - 1, 0, array.Length);
+    }
+
+    private void QSort(int[] array, int index, int from, int to)
+    {
+        if (from >= to) return;
+        
+        // Partitioning input array
+        var pivotIndex = QSortPivoting(array, index, from, to);
+        
+        // QSorting left half
+        var leftFrom = from;
+        var leftTo = pivotIndex;
+        var leftPivotIndex = pivotIndex - 1;
+        QSort(array, leftPivotIndex, leftFrom, leftTo);
+        
+        // QSorting right half
+        var rightFrom = pivotIndex + 1;
+        var rightTo = to;
+        var rightPivotIndex = to - 1;
+        QSort(array, rightPivotIndex, rightFrom, rightTo);
+    }
+
+    private int QSortPivoting(int[] array, int index, int from, int to)
+    {
+        var pivot = array[index];
+        int boundary = from - 1;
+        int j = from;
+        while (j < to)
+        {
+            if (array[j] < pivot)
+            {
+                boundary++;
+                (array[boundary], array[j]) = (array[j], array[boundary]);
+            }
+
+            j++;
+        }
+
+        boundary++;
+        (array[to - 1], array[boundary]) = (array[boundary], array[to - 1]);
+
+        return boundary;
+    }
 }
