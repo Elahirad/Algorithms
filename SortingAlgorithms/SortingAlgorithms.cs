@@ -19,4 +19,21 @@ public class SortingAlgorithms
             if (sorted) return;
         }
     }
+
+    public void SelectionSort(List<int> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            int minIndex = i;
+            for (int j = i; j < list.Count; j++)
+            {
+                if (list[j] < list[minIndex])
+                {
+                    minIndex = j;
+                }
+            }
+
+            (list[minIndex], list[i]) = (list[i], list[minIndex]);
+        }
+    }
 }
