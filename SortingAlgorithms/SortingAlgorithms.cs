@@ -52,4 +52,41 @@ public class SortingAlgorithms
             list[j + 1] = takenItem;
         }
     }
+
+    public void MergeSort(List<int> list)
+    {
+        if (list.Count < 2) return;
+        var firstHalf = new List<int>();
+        var secondHalf = new List<int>();
+        SliceList(list, firstHalf, secondHalf);
+        MergeSort(firstHalf);
+        MergeSort(secondHalf);
+        MergeTwoLists(list, firstHalf, secondHalf);
+    }
+
+    private void SliceList(List<int> list, List<int> firstHalf, List<int> secondHalf)
+    {
+        if (list.Count == 0) return;
+        int halfIndex = list.Count / 2;
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (i < halfIndex) firstHalf.Add(list[i]);
+            else secondHalf.Add(list[i]);
+        }
+    }
+
+    private void MergeTwoLists(List<int> list, List<int> firstHalf, List<int> secondHalf)
+    {
+        int firstIndex = 0, secondIndex = 0, listIndex = 0;
+        while (listIndex < list.Count)
+        {
+            if (firstIndex >= firstHalf.Count) list[listIndex++] = secondHalf[secondIndex++];
+            else if (secondIndex >= secondHalf.Count) list[listIndex++] = firstHalf[firstIndex++];
+            else
+            {
+                if (firstHalf[firstIndex] > secondHalf[secondIndex]) list[listIndex++] = secondHalf[secondIndex++];
+                else list[listIndex++] = firstHalf[firstIndex++];
+            }
+        }
+    }
 }
