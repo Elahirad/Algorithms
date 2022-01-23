@@ -98,16 +98,16 @@ public class SortingAlgorithms
     private void QSort(int[] array, int index, int from, int to)
     {
         if (from >= to) return;
-        
+
         // Partitioning input array
         var pivotIndex = QSortPivoting(array, index, from, to);
-        
+
         // QSorting left half
         var leftFrom = from;
         var leftTo = pivotIndex;
         var leftPivotIndex = pivotIndex - 1;
         QSort(array, leftPivotIndex, leftFrom, leftTo);
-        
+
         // QSorting right half
         var rightFrom = pivotIndex + 1;
         var rightTo = to;
@@ -161,5 +161,32 @@ public class SortingAlgorithms
                 i++;
             }
         }
+    }
+
+    public void BucketSort(int[] array, int bucketCount)
+    {
+        var buckets = MakingBuckets(array, bucketCount);
+        var k = 0;
+        for (var i = 0; i < bucketCount; i++)
+        {
+            var bucketArray = buckets[i].ToArray();
+            QSort(bucketArray);
+            foreach (var item in bucketArray)
+            {
+                array[k++] = item;
+            }
+        }
+    }
+
+    private LinkedList<int>[] MakingBuckets(int[] array, int bucketCount)
+    {
+        var buckets = new LinkedList<int>[bucketCount];
+        for (var j = 0; j < bucketCount; j++) buckets[j] = new LinkedList<int>();
+        foreach (var item in array)
+        {
+            buckets[item / bucketCount].AddLast(item);
+        }
+
+        return buckets;
     }
 }
