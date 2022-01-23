@@ -36,4 +36,20 @@ public class SortingAlgorithms
             (list[minIndex], list[i]) = (list[i], list[minIndex]);
         }
     }
+
+    public void InsertionSort(List<int> list)
+    {
+        for (int i = 1; i < list.Count; i++)
+        {
+            var takenItem = list[i];
+            int j = i - 1;
+            while (j >= 0 && list[j] > takenItem)
+            {
+                list[j + 1] = list[j];
+                j--;
+            }
+
+            list[j + 1] = takenItem;
+        }
+    }
 }
