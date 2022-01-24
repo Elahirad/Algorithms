@@ -32,7 +32,7 @@ public class StringManipulation
     //     while (stack.Count != 0) result.Append(stack.Pop());
     //     return result.ToString();
     // }
-    
+
     //Reversing without stack
     public static string ReverseString(string input)
     {
@@ -49,5 +49,24 @@ public class StringManipulation
         // var result = new StringBuilder();
         // for (var i = words.Length - 1; i >= 0; i--) result.Append(words[i] + " ");
         // return result.ToString();
+    }
+
+    public static bool IsRotationOfAnother(string first, string second)
+    {
+        return (first.Length == second.Length && (first + first).Contains(second));
+        // if (first.Length != second.Length) return false;
+        // int checkedCount = 0;
+        // var firstCharOfSecondIndex = first.IndexOf(second[0]);
+        // var i = 0;
+        // while (checkedCount != first.Length)
+        // {
+        //     var firstIndex = (i + firstCharOfSecondIndex) >= first.Length
+        //         ? (i + firstCharOfSecondIndex) - first.Length
+        //         : i + firstCharOfSecondIndex;
+        //     if (first[firstIndex] != second[i]) return false;
+        //     i++;
+        //     checkedCount++;
+        // }
+        // return true;
     }
 }
