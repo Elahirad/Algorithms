@@ -34,7 +34,7 @@ public class SearchingAlgorithms
 
     private int BinarySearchRecursive(int[] array, int item, int start, int end)
     {
-        if (start > end) return array[start] == item ? start : -1;
+        if (start >= end) return array[end] == item ? start : -1;
         int middle = (start + end) / 2;
         if (array[middle] > item) return BinarySearchRecursive(array, item, start, middle - 1);
         if (array[middle] < item) return BinarySearchRecursive(array, item, middle + 1, end);
@@ -85,5 +85,18 @@ public class SearchingAlgorithms
         }
 
         return -1;
+    }
+
+    public int ExponentialSearch(int[] array, int item)
+    {
+        var bound = 1;
+        while (bound < array.Length && array[bound] < item)
+        {
+            bound *= 2;
+        }
+
+        var start = bound / 2;
+        var end = bound >= array.Length ? array.Length - 1 : bound;
+        return BinarySearchRecursive(array, item, start, end);
     }
 }
