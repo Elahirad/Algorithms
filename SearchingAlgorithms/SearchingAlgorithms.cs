@@ -58,4 +58,32 @@ public class SearchingAlgorithms
         if (item < array[firstMiddle]) return TernarySearch(array, item, start, firstMiddle - 1);
         return TernarySearch(array, item, firstMiddle + 1, secondMiddle - 1);
     }
+
+    public int JumpSearch(int[] array, int item)
+    {
+        var blockSize = (int) Math.Sqrt(array.Length);
+        var start = 0;
+        var next = blockSize;
+        while (start < array.Length)
+        {
+            if (array[next - 1] >= item)
+            {
+                for (int i = next - 1; i >= 0; i--)
+                {
+                    if (array[i] == item)
+                        return i;
+                }
+
+                return -1;
+            }
+            else
+            {
+                start += blockSize;
+                next += blockSize;
+                if (next > array.Length) next = array.Length;
+            }
+        }
+
+        return -1;
+    }
 }
