@@ -107,4 +107,20 @@ public class StringManipulation
 
         return String.Join(" ", words);
     }
+
+    public static bool AreAnagram(string str1, string str2)
+    {
+        if (str1.Length != str2.Length) return false;
+        return str1.All(ch => str2.Contains(ch));
+    }
+
+    public static bool IsPalindrome(string input)
+    {
+        for (var i = 0; i < input.Length; i++)
+        {
+            if (input[i] != input[input.Length - 1 - i]) return false;
+        }
+
+        return true;
+    }
 }
