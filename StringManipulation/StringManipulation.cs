@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Algorithms.StringManipulation;
 
@@ -68,5 +69,42 @@ public class StringManipulation
         //     checkedCount++;
         // }
         // return true;
+    }
+
+    public static string RemoveDuplicateChars(string input)
+    {
+        var pickedCharsSet = new HashSet<char>();
+        var result = new StringBuilder();
+        foreach (var ch in input.Where(ch => !pickedCharsSet.Contains(ch)))
+        {
+            result.Append(ch);
+            pickedCharsSet.Add(ch);
+        }
+
+        return result.ToString();
+    }
+
+    public static char MostRepeatedChar(string input)
+    {
+        var charsCount = new Dictionary<char, int>();
+        foreach (var ch in input)
+        {
+            if (!charsCount.ContainsKey(ch)) charsCount.Add(ch, 1);
+            else charsCount[ch]++;
+        }
+
+        return charsCount.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+    }
+
+    public static string Capitalize(string input)
+    {
+        Regex regex = new Regex("[ ]{2,}", RegexOptions.None);
+        var words = regex.Replace(input.Trim(), " ").Split(" ");
+        for (var i = 0; i < words.Length; i++)
+        {
+            words[i] = Char.ToUpper(words[i][0]) + words[i].Substring(1) + " ";
+        }
+
+        return String.Join(" ", words);
     }
 }
